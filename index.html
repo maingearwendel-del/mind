@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>WebCraft - We craft digital experiences</title>
+    <meta name="description" content="We craft digital experiences. Specializing in high-performance Shopify and WordPress websites that convert visitors into customers with stunning design and flawless functionality.">
+    <script src="https://widget.senja.io/widget/1e108d33-5ada-465c-bbf5-7228c2f2d25e/platform.js" type="text/javascript" async></script>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+  </head> 
+  <body class="bg-black"> 
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Show ElevenLabs widget after user scrolls on mobile
+      document.addEventListener('DOMContentLoaded', function() {
+        let widget = null;
+        let hasScrolled = false;
+        
+        function handleContactSectionVisibility() {
+          if (window.innerWidth <= 767 && widget) {
+            // Hide widget if user is at the top of the page (within 100px)
+            if (window.pageYOffset <= 100) {
+              widget.classList.add('hide-widget');
+              widget.classList.remove('show-widget');
+              return;
+            }
+            
+            // If user hasn't scrolled yet, keep widget hidden
+            if (!hasScrolled) {
+              widget.classList.add('hide-widget');
+              widget.classList.remove('show-widget');
+              return;
+            }
+            
+            // Find the contact section element
+            const contactSection = document.getElementById('contact');
+            
+            if (contactSection) {
+              const contactRect = contactSection.getBoundingClientRect();
+              const contactTop = contactRect.top;
+              const windowHeight = window.innerHeight;
+              
+              // Hide widget only when contact section is far above (more than 500px above viewport)
+              if (contactTop < -500) {
+                widget.classList.add('hide-widget');
+                widget.classList.remove('show-widget');
+              } else {
+                // Show widget when contact section is within range
+                widget.classList.add('show-widget');
+                widget.classList.remove('hide-widget');
+              }
+            }
+          }
+        }
+        
+        // Function to handle initial scroll detection
+        function handleFirstScroll() {
+          if (window.innerWidth <= 767 && !hasScrolled) {
+            hasScrolled = true;
+            if (widget) {
+              widget.classList.add('show-widget');
+              widget.classList.remove('hide-widget');
+            }
+          }
+        }
+        
+        // Function to adjust widget position
+        function adjustWidgetPosition() {
+          const mobileWidget = document.querySelector('elevenlabs-convai[agent-id="agent_5301k52whsepe348tq3zhrjr6y1d"]');
+          if (mobileWidget && window.innerWidth <= 767) {
+            // Force the widget position with JavaScript
+            mobileWidget.style.setProperty('bottom', '-0px', 'important');
+            mobileWidget.style.setProperty('transform', 'translateY(20px)', 'important');
+            
+            // Also try to target any shadow DOM or iframe content
+            setTimeout(() => {
+              const widgetIframe = mobileWidget.querySelector('iframe');
+              if (widgetIframe) {
+                widgetIframe.style.setProperty('bottom', '-0px', 'important');
+              }
+            }, 500);
+          }
+        }
+        
+        // Wait for widget to load, then add scroll listeners
+        setTimeout(() => {
+          widget = document.querySelector('elevenlabs-convai[agent-id="agent_5301k52whsepe348tq3zhrjr6y1d"]');
+          if (window.innerWidth <= 767) {
+            // Start with widget hidden on mobile
+            if (widget) {
+              widget.classList.add('hide-widget');
+              widget.classList.remove('show-widget');
+            }
+            
+            // Add scroll listeners
+            window.addEventListener('scroll', handleFirstScroll, { passive: true });
+            window.addEventListener('scroll', handleContactSectionVisibility, { passive: true });
+            
+            // Adjust widget position after it loads
+            adjustWidgetPosition();
+            
+            // Also adjust position when widget becomes visible
+            const observer = new MutationObserver(() => {
+              adjustWidgetPosition();
+            });
+            
+            const mobileWidget = document.querySelector('elevenlabs-convai[agent-id="agent_5301k52whsepe348tq3zhrjr6y1d"]');
+            if (mobileWidget) {
+              observer.observe(mobileWidget, { attributes: true, childList: true, subtree: true });
+            }
+          }
+        }, 2000);
+      });
+    </script>
+    <script>
+      // Enhanced fix for ElevenLabs widget keyboard not hiding on mobile
+      document.addEventListener('DOMContentLoaded', function() {
+        let keyboardFixApplied = false;
+        
+        function forceKeyboardHide() {
+          // Multiple methods to force keyboard hiding
+          if (document.activeElement) {
+            document.activeElement.blur();
+          }
+          
+          // Create a temporary input and focus/blur it
+          const tempInput = document.createElement('input');
+          tempInput.style.position = 'absolute';
+          tempInput.style.left = '-9999px';
+          tempInput.style.opacity = '0';
+          document.body.appendChild(tempInput);
+          tempInput.focus();
+          tempInput.blur();
+          document.body.removeChild(tempInput);
+          
+          // Scroll trick to force keyboard hide
+          const currentScroll = window.pageYOffset;
+          window.scrollTo(0, currentScroll + 1);
+          setTimeout(() => {
+            window.scrollTo(0, currentScroll);
+          }, 50);
+        }
+        
+        function handleElevenLabsKeyboard() {
+          if (keyboardFixApplied) return;
+          
+          const elevenLabsWidget = document.querySelector('elevenlabs-convai[agent-id="agent_5301k52whsepe348tq3zhrjr6y1d"]');
+          if (!elevenLabsWidget) return;
+          
+          // Use a more aggressive approach to find and handle inputs
+          const checkForInputs = () => {
+            // Check shadow DOM if available
+            if (elevenLabsWidget.shadowRoot) {
+              const shadowInputs = elevenLabsWidget.shadowRoot.querySelectorAll('input, textarea');
+              shadowInputs.forEach(input => {
+                input.addEventListener('keydown', function(e) {
+                  if (e.key === 'Enter' || e.keyCode === 13) {
+                    e.preventDefault();
+                    forceKeyboardHide();
+                  }
+                });
+              });
+            }
+            
+            // Check regular DOM
+            const inputs = elevenLabsWidget.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+              input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.keyCode === 13) {
+                  e.preventDefault();
+                  forceKeyboardHide();
+                }
+              });
+            });
+            
+            // Check iframes
+            const iframes = elevenLabsWidget.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+              try {
+                iframe.addEventListener('load', () => {
+                  try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (iframeDoc) {
+                      const iframeInputs = iframeDoc.querySelectorAll('input, textarea');
+                      iframeInputs.forEach(input => {
+                        input.addEventListener('keydown', function(e) {
+                          if (e.key === 'Enter' || e.keyCode === 13) {
+                            e.preventDefault();
+                            forceKeyboardHide();
+                          }
+                        });
+                      });
+                    }
+                  } catch (e) {
+                    // Cross-origin restrictions
+                  }
+                });
+              } catch (e) {
+                // Handle errors
+              }
+            });
+          };
+          
+          // Initial check
+          checkForInputs();
+          
+          // Set up observer for dynamic content
+          const observer = new MutationObserver(() => {
+            checkForInputs();
+          });
+          
+          observer.observe(elevenLabsWidget, { 
+            childList: true, 
+            subtree: true, 
+            attributes: true 
+          });
+          
+          keyboardFixApplied = true;
+        }
+        
+        // Try multiple times to catch the widget
+        let attempts = 0;
+        const maxAttempts = 10;
+        
+        const tryToFixKeyboard = () => {
+          attempts++;
+          handleElevenLabsKeyboard();
+          
+          if (attempts < maxAttempts && !keyboardFixApplied) {
+            setTimeout(tryToFixKeyboard, 1000);
+          }
+        };
+        
+        // Start trying after a delay
+        setTimeout(tryToFixKeyboard, 2000);
+        
+        // Also try when the widget becomes visible
+        window.addEventListener('scroll', () => {
+          if (!keyboardFixApplied) {
+            handleElevenLabsKeyboard();
+          }
+        });
+      });
+    </script>
+
+    <!-- Mobile AI Agent-->   
+    <elevenlabs-convai agent-id="agent_5301k52whsepe348tq3zhrjr6y1d"></elevenlabs-convai>
+<!-- Desktop AI Agent --><elevenlabs-convai agent-id="agent_8201k4zkjv3cfsdbc0rh9mgj6grh"></elevenlabs-convai>
+  </body>
+</html>
