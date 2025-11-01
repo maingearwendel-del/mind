@@ -55,7 +55,7 @@ const HeroHome: React.FC<HeroHomeProps> = ({ themeClasses, scrollToSection, isTo
             
              
             <p className={`text-lg sm:text-xl lg:text-xl ${themeClasses.textSecondary} leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0 px-2 sm:px-0 lg:mt-[50px] mt-0 mb-0 lg:mb-10`}>
-              We help businesses create websites that convert visitors into customers. <b>Specializing in</b> <img src="/Shopify_logo.svg" alt="Shopify Logo" description="Start Selling With Shopify" className="h-6 lg:h-7 inline-block align-middle ml-1 -translate-y-0.5" />, <img src="/WooCommerce_logo.svg" alt="Woocommerce Logo" description="Start Selling With Woocommerce" className="h-6 lg:h-7 inline-block align-middle ml-1 translate-y-0.95" />&nbsp;  & <img src="/WordPress_logo.svg" alt="Wordpress Logo" description="Get Your Wordpress Website" className="h-6 lg:h-7 inline-block align-middle ml-1 -translate-y-0.5" /> <b>Sites</b>.
+              We help businesses create websites that convert visitors into customers. <b>Specializing in</b> <img src="/Shopify_logo.svg" alt="Shopify Logo" description="Start Selling With Shopify" className="h-6 lg:h-7 inline-block align-middle ml-1 -translate-y-0.5" />, <img src="/WooCommerce_logo.svg" alt="Woocommerce Logo" description="Start Selling With Woocommerce" className="h-6 lg:h-7 inline-block align-middle ml-1 translate-y-0.95" />&nbsp;  & &nbsp;  <img src="/WordPress_logo.svg" alt="Wordpress Logo" description="Get Your Wordpress Website" className="h-6 lg:h-7 inline-block align-middle ml-1 -translate-y-0.5" /> <b>Sites</b>.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-0 lg:mb-0 px-2 sm:px-0">
