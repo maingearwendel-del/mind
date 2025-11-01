@@ -49,7 +49,7 @@ const HeroHome: React.FC<HeroHomeProps> = ({ themeClasses, scrollToSection, isTo
  
  
  <h1 className={` mt-[25px]  lg:mt-[0px] text-4xl sm:text-5xl lg:text-6xl xl:text-[70px] font-bold text-[#3d3d3d] leading-tight mb-6 tracking-tight px-2 sm:px-0`}>
-              Building brands that<br></br> <span className="lg:text-[70px]">Resonate & Websites</span><span className="hidden sm:block text-[6rem] xl:text-[5.75rem]"> That <span className="text-[4.3rem] sm:text-8xl lg:text-7xl xl:text-[5.75rem]  bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent"> Convert </span> <span className="text-6xl sm:text-5xl lg:text-6xl xl:text-6xl inline-block animate-wobble">    <img src="/money.webp" alt="Cash Emojii" className="h-16 w-auto" /></span></span>
+              Building brands that<br></br> <span className="lg:text-[60px]">Resonate & Websites</span><span className="hidden sm:block text-[6rem] xl:text-[5.75rem]"> That <span className="text-[4.3rem] sm:text-8xl lg:text-7xl xl:text-[5.75rem]  bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent"> Convert </span> <span className="text-6xl sm:text-5xl lg:text-6xl xl:text-6xl inline-block animate-wobble">    <img src="/money.webp" alt="Cash Emojii" className="h-16 w-auto" /></span></span>
               <span className="md:hidden"><span className="text-[4.3rem] sm:text-8xl lg:text-7xl xl:text-8xl  bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent"> Convert </span> <span className="text-6xl sm:text-5xl lg:text-6xl xl:text-6xl inline-block animate-wobble">    <img src="/money.webp" alt="Cash Emojii" className="h-16 w-auto" /></span></span>
               </h1>
             
